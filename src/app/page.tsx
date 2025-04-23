@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Login from "@/app/login/page";
 import axios from "axios";
 
