@@ -2,7 +2,7 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    if (email !== "abc@gmail.com" && password !== "abc1234") {
+    if (email !== "test@gmail.com" && password !== "test1234") {
       throw new Error("Incorrect email or password");
     }
 

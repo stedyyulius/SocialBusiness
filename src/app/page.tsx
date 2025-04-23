@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 import Login from "@/app/login/page";
+import axios from "axios";
 
 const socialLinks = [
   {
@@ -29,24 +29,42 @@ const socialLinks = [
 ];
 
 export default function Home() {
-  const router = useRouter();
   const [query, setQuery] = useState("");
 
-  if (!localStorage.getItem("SESSION")) {
+  if (typeof window !== "undefined" && !localStorage.getItem("SESSION")) {
     return <Login />;
   }
+
+  const deletePrivateData = async () => {
+    try {
+      await axios.post("/api/dataDeletion", {
+        signed_request: "mock",
+      });
+    } catch (error: unknown) {
+      console.log(error);
+    }
+  };
 
   const filteredLinks = socialLinks.filter((link) =>
     link.label.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col items-center justify-start p-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col items-center justify-start p-6 relative">
+      {/* Top Right Button */}
+      <div className="absolute top-4 right-4">
+        <button
+          className="bg-gray-700 text-sm px-4 py-2 rounded-md hover:bg-gray-600 transition"
+          onClick={() => deletePrivateData()}
+        >
+          Data Deletion
+        </button>
+      </div>
+
       <h1 className="text-3xl sm:text-4xl font-bold mt-10 mb-6 tracking-tight">
         Select a Social Media Account
       </h1>
 
-      {/* Search Bar */}
       <input
         type="text"
         placeholder="Search accounts..."
@@ -55,7 +73,6 @@ export default function Home() {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
         {filteredLinks.length > 0 ? (
           filteredLinks.map((link, idx) => (

@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
       <h2 className="text-xl font-semibold mt-6 mb-2">Contact Us</h2>
       <p className="mb-4">
         If you have any questions or concerns about your privacy, please contact
-        us at support@centraexchange.com.
+        us at support@social-business.com.
       </p>
 
       <p className="text-sm text-gray-500 mt-12">
