@@ -65,8 +65,8 @@ export default function PrivacyPolicy() {
       </h2>
       <p className="mb-4">
         You grant permission to access your Instagram Business account by
-        explicitly authorizing access via Meta's OAuth flow. You may revoke this
-        access at any time through your Meta settings.
+        explicitly authorizing access via Meta`&apos;`s OAuth flow. You may
+        revoke this access at any time through your Meta settings.
       </p>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">

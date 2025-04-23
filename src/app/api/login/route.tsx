@@ -19,7 +19,8 @@ export async function POST(request: Request) {
         },
       },
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    console.log(error);
     return new Response(
       JSON.stringify({
         message: "Incorrect email or password",

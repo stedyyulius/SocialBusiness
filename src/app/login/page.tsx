@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
+import { Error } from "../types/common";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -9,16 +10,16 @@ export default function Login() {
 
   const signIn = async () => {
     try {
-      const { data } = await axios.post("/api/login", {
+      await axios.post("/api/login", {
         email,
         password,
       });
 
       localStorage.setItem("SESSION", "ABC");
       window.location.href = "/";
-    } catch (error: any) {
-      console.log(error);
-      alert(error.response.data.message);
+    } catch (error: unknown) {
+      const err = error as Error;
+      alert(err.response?.data?.message || "An unexpected error occurred");
     }
   };
 

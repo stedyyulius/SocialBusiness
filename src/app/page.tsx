@@ -34,7 +34,7 @@ export default function Home() {
     if (!localStorage.getItem("SESSION")) {
       router.push("/login");
     }
-  }, []);
+  }, [router]);
 
   const filteredLinks = socialLinks.filter((link) =>
     link.label.toLowerCase().includes(query.toLowerCase()),
