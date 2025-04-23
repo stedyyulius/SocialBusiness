@@ -1,6 +1,7 @@
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
-    const { signed_request } = await request.json();
+    const searchParams = new URLSearchParams(request.url);
+    const signed_request = searchParams.get("signed_request");
 
     return new Response(
       JSON.stringify({
