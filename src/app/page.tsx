@@ -5,22 +5,22 @@ import { useRouter } from "next/navigation";
 
 const socialLinks = [
   {
-    label: "Instagram - TravelBlog",
+    label: "Instagram - Indonesia Store",
     href: "/api/redirect?account=insta1",
     icon: "📸",
   },
   {
-    label: "Instagram - StoreBrand",
+    label: "Instagram - China Store",
     href: "/api/redirect?account=insta2",
     icon: "🛍️",
   },
   {
-    label: "Instagram - DevLife",
+    label: "Instagram - Dubai Store",
     href: "/api/redirect?account=insta3",
     icon: "💻",
   },
   {
-    label: "Instagram - FoodieGram",
+    label: "Instagram - Thailand Store",
     href: "/api/redirect?account=insta4",
     icon: "🍔",
   },
