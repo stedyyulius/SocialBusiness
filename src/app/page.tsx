@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+import Login from "@/app/login/page";
 
 const socialLinks = [
   {
@@ -30,11 +32,9 @@ export default function Home() {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    if (!localStorage.getItem("SESSION")) {
-      router.push("/login");
-    }
-  }, [router]);
+  if (!localStorage.getItem("SESSION")) {
+    return <Login />;
+  }
 
   const filteredLinks = socialLinks.filter((link) =>
     link.label.toLowerCase().includes(query.toLowerCase()),
