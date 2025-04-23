@@ -38,6 +38,8 @@ export default function Home() {
   const deletePrivateData = async () => {
     try {
       await axios.get("/api/dataDeletion?sign_request=mock");
+
+      alert("all data deleted");
     } catch (error: unknown) {
       console.log(error);
     }
