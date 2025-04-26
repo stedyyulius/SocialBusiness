@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Login from "@/app/login/page";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const socialLinks = [
   {
@@ -30,9 +30,11 @@ const socialLinks = [
 export default function Home() {
   const [query, setQuery] = useState("");
 
-  if (typeof window !== "undefined" && !localStorage.getItem("SESSION")) {
-    return <Login />;
-  }
+  const router = useRouter();
+
+  // if (typeof window !== "undefined" && !localStorage.getItem("SESSION")) {
+  //   return <Login />;
+  // }
 
   const deletePrivateData = async () => {
     try {
@@ -75,9 +77,8 @@ export default function Home() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
         {filteredLinks.length > 0 ? (
           filteredLinks.map((link, idx) => (
-            <a
+            <div
               key={idx}
-              href={link.href}
               className="bg-gray-800 hover:bg-gray-700 transition-all duration-200 rounded-xl p-6 shadow-xl hover:scale-[1.02] border border-gray-700 group"
             >
               <div className="flex items-center justify-between mb-2">
@@ -86,9 +87,25 @@ export default function Home() {
                   Instagram
                 </span>
               </div>
-              <h2 className="text-lg font-semibold">{link.label}</h2>
-              <p className="text-sm text-gray-400 mt-1">Click to login</p>
-            </a>
+
+              <h2 className="text-lg font-semibold mb-4">{link.label}</h2>
+
+              {/* Icons */}
+              <div className="flex gap-3">
+                <button
+                  className="flex items-center gap-1 bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-lg text-sm cursor-pointer"
+                  onClick={() => router.push(`/chat?${link.label}`)}
+                >
+                  💬 Chat
+                </button>
+                <button
+                  className="flex items-center gap-1 bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-lg text-sm cursor-pointer"
+                  onClick={() => router.push(`/posts?${link.label}`)}
+                >
+                  🖼️ Pictures
+                </button>
+              </div>
+            </div>
           ))
         ) : (
           <div className="col-span-full text-center text-gray-400">
