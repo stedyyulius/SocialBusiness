@@ -3,6 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Login from "./login/page";
 
 const socialLinks = [
   {
@@ -32,9 +33,9 @@ export default function Home() {
 
   const router = useRouter();
 
-  // if (typeof window !== "undefined" && !localStorage.getItem("SESSION")) {
-  //   return <Login />;
-  // }
+  if (typeof window !== "undefined" && !localStorage.getItem("SESSION")) {
+    return <Login />;
+  }
 
   const deletePrivateData = async () => {
     try {
