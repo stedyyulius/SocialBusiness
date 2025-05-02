@@ -1,10 +1,16 @@
-export async function POST(request: Request) {
-    try {
-      const json = await request.json();
+export async function GET(request: Request) {
+    try {  
+      const searchParams = new URLSearchParams(request.url);
+      const mode = searchParams.get("hub.mode");
+      const token = searchParams.get("hub.verify_token");
+      const challenge = searchParams.get("hub.challenge");
 
+      if (mode !== "subscribe" && token !== "VERIFY_TOKEN") {
+        throw new Error("Unauthorized")
+      }
 
-      return new Response(
-        JSON.stringify(json),
+       return new Response(
+        JSON.stringify(challenge),
         {
           status: 200,
           headers: {
@@ -14,6 +20,7 @@ export async function POST(request: Request) {
           },
         },
       );
+
     } catch (error: unknown) {
       console.log(error);
       return new Response(
@@ -21,7 +28,7 @@ export async function POST(request: Request) {
           message: error,
         }),
         {
-          status: 400,
+          status: 403,
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
