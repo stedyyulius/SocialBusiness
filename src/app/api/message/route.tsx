@@ -10,8 +10,7 @@ export async function GET(request: Request) {
         throw new Error("Unauthorized")
       }
 
-       return new Response(
-        JSON.stringify(challenge),
+       return new Response(challenge,
         {
           status: 200,
           headers: {
@@ -25,9 +24,7 @@ export async function GET(request: Request) {
     } catch (error: unknown) {
       console.log(error);
       return new Response(
-        JSON.stringify({
-          message: error,
-        }),
+        JSON.stringify(error),
         {
           status: 403,
           headers: {
