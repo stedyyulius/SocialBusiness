@@ -4,8 +4,9 @@ export async function GET(request: Request) {
       const mode = searchParams.get("hub.mode");
       const token = searchParams.get("hub.verify_token");
       const challenge = searchParams.get("hub.challenge");
+      const VERIFY_TOKEN = process.env.META_TOKEN;
 
-      if (mode !== "subscribe" && token !== "VERIFY_TOKEN") {
+      if (mode !== "subscribe" && token !== VERIFY_TOKEN) {
         throw new Error("Unauthorized")
       }
 
